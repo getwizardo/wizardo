@@ -1,14 +1,23 @@
 run = "tsx index.ts"
 entrypoint = "index.ts"
-hidden = [".config", "package-lock.json", "tsconfig.json"]
-modules = ["nodejs-20"]
+
+hidden = [
+  ".config",
+  "package-lock.json",
+  "tsconfig.json"
+]
+modules = ["nodejs-20", "nodejs-23"]
 
 [nix]
 channel = "stable-24_05"
 packages = ["hut"]
 
 [gitHubImport]
-requiredFiles = [".replit", "replit.nix", ".config"]
+requiredFiles = [
+  ".replit",
+  "replit.nix",
+  ".config"
+]
 
 [deployment]
 run = ["tsx", "index.ts"]
@@ -23,7 +32,7 @@ externalPort = 80
 expertMode = true
 
 [workflows]
-runButton = "Project"
+runButton = "Publish Build"
 
 [[workflows.workflow]]
 name = "Project"
@@ -53,3 +62,20 @@ author = "agent"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "npm run dev"
+
+[[workflows.workflow]]
+name = "Publish Build"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "bash scripts/publish-build.sh release"
+
+[[workflows.workflow]]
+name = "Build tsc"
+mode = "sequential"
+author = 39231731
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "tsc"

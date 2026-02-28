@@ -1,19 +1,20 @@
 {
-  "name": "nodejs-typescript",
+  "name": "wizardo",
   "version": "1.0.0",
-  "description": "",
+  "description": "🪄 wizardo is the alternative for nextcloud, it's a simple and fast file storage service, for your personal use.",
   "main": "dist/index.js",
-  "type" : "module",
+  "type": "module",
   "scripts": {
     "dev": "tsx watch src/index.ts",
     "build": "tsc",
     "start": "node dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "wizardo maillist <~lunalov2/wizardo@lists.sr.ht>",
+  "license": "MIT",
   "dependencies": {
-    "node-fetch": "^3.3.1"
+    "node-fetch": "^3.3.1",
+    "typescript": "^5.9.3"
   },
   "devDependencies": {
     "@types/node": "^20.10.0",
