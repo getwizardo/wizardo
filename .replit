@@ -1,0 +1,43 @@
+run = "tsx index.ts"
+entrypoint = "index.ts"
+hidden = [".config", "package-lock.json", "tsconfig.json"]
+modules = ["nodejs-20"]
+
+[nix]
+channel = "stable-24_05"
+packages = ["hut"]
+
+[gitHubImport]
+requiredFiles = [".replit", "replit.nix", ".config"]
+
+[deployment]
+run = ["tsx", "index.ts"]
+deploymentTarget = "cloudrun"
+ignorePorts = false
+
+[[ports]]
+localPort = 3000
+externalPort = 80
+
+[agent]
+expertMode = true
+
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Run CLI"
+
+[[workflows.workflow]]
+name = "Run CLI"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm start"
