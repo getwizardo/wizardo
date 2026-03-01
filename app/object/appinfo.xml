@@ -1,0 +1,31 @@
+<!--
+wizardo Object App - Object Storage/Database
+
+Copyright (C) 2026 wizardo maillist <~lunalov2/wizardo@lists.sr.ht>
+-->
+<?xml version="1.0" encoding="UTF-8"?>
+<mime-app>
+  <type>application</type>
+  <name>object</name>
+  <appname>object</appname>
+  <version>1.0.0</version>
+  <description>Object storage and database-like operations</description>
+  <author>wizardo</author>
+  <license>MIT</license>
+  <categories>
+    <category>storage</category>
+    <category>database</category>
+  </categories>
+  <features>
+    <feature name="key_value">Key-value storage</feature>
+    <feature name="collections">Collections support</feature>
+    <feature name="query">Query and filter data</feature>
+  </features>
+  <ext:dependencies mimetype="application/vnd.wizardo.appinfo+xml">
+    <ext:dependency name="com.wizardo.core" version="1.0.0" />
+  </ext:dependencies>
+  <pasv:permissions mimetype="application/vnd.wizardo.appinfo+xml">
+    <pasv:permission name="read" value="true" />
+    <pasv:permission name="write" value="true" />
+  </pasv:permissions>
+</mime-app>
