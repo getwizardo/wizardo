@@ -13,11 +13,16 @@
   "author": "wizardo maillist <~lunalov2/wizardo@lists.sr.ht>",
   "license": "MIT",
   "dependencies": {
+    "@nephele/adapter-file-system": "^1.0.0-alpha.67",
+    "express": "^5.2.1",
+    "nephele": "^1.0.0-alpha.67",
     "node-fetch": "^3.3.1",
+    "node-html-parser": "^7.0.2",
     "typescript": "^5.9.3"
   },
   "devDependencies": {
-    "@types/node": "^20.10.0",
+    "@types/express": "^5.0.6",
+    "@types/node": "^20.19.35",
     "tsx": "^4.7.1"
   }
 }
