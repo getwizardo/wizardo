@@ -49,10 +49,9 @@ export class SystemModule {
     let totalTick = 0;
 
     for (const cpu of cpus) {
-      for (const type in cpu.times) {
-        totalTick += cpu.times[type as keyof typeof cpu.times];
-      }
-      totalIdle += cpu.times.idle;
+      const times = cpu.times;
+      totalTick += times.user + times.nice + times.sys + times.idle + times.irq;
+      totalIdle += times.idle;
     }
 
     const idle = totalIdle / cpus.length;

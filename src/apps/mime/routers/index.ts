@@ -19,7 +19,7 @@ const router = Router();
  */
 router.get('/:filename', async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { filename } = req.params;
+    const filename = Array.isArray(req.params.filename) ? req.params.filename[0] : req.params.filename;
     const result = MimeModule.getMimeType(filename);
     
     res.json({

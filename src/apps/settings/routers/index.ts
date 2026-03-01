@@ -14,6 +14,11 @@ export const priority = 80;
 
 const router = Router();
 
+// Helper to convert string | string[] to string
+const getParamString = (param: string | string[]): string => {
+  return Array.isArray(param) ? param[0] : param;
+};
+
 /**
  * GET /settings - Get all settings
  */
@@ -36,7 +41,7 @@ router.get('/', async (req: Request, res: Response, next: NextFunction) => {
  */
 router.get('/:key', async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { key } = req.params;
+    const key = getParamString(req.params.key);
     const setting = SettingsModule.getSetting(key);
     
     if (!setting) {
@@ -61,7 +66,7 @@ router.get('/:key', async (req: Request, res: Response, next: NextFunction) => {
  */
 router.put('/:key', async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { key } = req.params;
+    const key = getParamString(req.params.key);
     const { value } = req.body;
     
     const success = SettingsModule.set(key, value);
@@ -76,10 +81,7 @@ router.put('/:key', async (req: Request, res: Response, next: NextFunction) => {
 
     res.json({
       success: true,
-      data: {
-        key,
-        value,
-      },
+      data: { key, value },
     });
   } catch (error) {
     next(error);
@@ -111,7 +113,7 @@ router.put('/', async (req: Request, res: Response, next: NextFunction) => {
  */
 router.delete('/:key', async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { key } = req.params;
+    const key = getParamString(req.params.key);
     const success = SettingsModule.delete(key);
     
     if (!success) {
@@ -132,7 +134,7 @@ router.delete('/:key', async (req: Request, res: Response, next: NextFunction) =
 });
 
 /**
- * GET /settings/categories - Get settings categories
+ * GET /settings/meta/categories - Get settings categories
  */
 router.get('/meta/categories', async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -210,7 +212,7 @@ router.post('/reset', async (req: Request, res: Response, next: NextFunction) =>
  */
 router.get('/preferences/:userId', async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { userId } = req.params;
+    const userId = getParamString(req.params.userId);
     const pref = SettingsModule.getUserPreference(userId, '*');
     
     res.json({
@@ -227,7 +229,7 @@ router.get('/preferences/:userId', async (req: Request, res: Response, next: Nex
  */
 router.put('/preferences/:userId', async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { userId } = req.params;
+    const userId = getParamString(req.params.userId);
     const preferences = req.body;
     
     for (const [key, value] of Object.entries(preferences)) {

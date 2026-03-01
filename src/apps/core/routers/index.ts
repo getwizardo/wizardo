@@ -74,7 +74,8 @@ router.get('/apps', async (req: Request, res: Response, next: NextFunction) => {
  */
 router.get('/apps/:id', async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const app = AppManager.getApp(req.params.id);
+    const appId = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
+    const app = AppManager.getApp(appId);
     
     if (!app) {
       res.status(404).json({

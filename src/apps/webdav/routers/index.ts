@@ -15,6 +15,12 @@ export const priority = 50;
 const router = Router();
 const handler = new WebDAVHandler('./webdav');
 
+// Helper to send XML response
+const sendXml = (res: Response, data: any) => {
+  const xml = typeof data === 'string' ? data : JSON.stringify(data);
+  res.type('application/xml').send(xml);
+};
+
 /**
  * Handle WebDAV requests
  */
@@ -28,7 +34,7 @@ router.all('*', async (req: Request, res: Response, next: NextFunction) => {
       case 'GET': {
         if (handler.isDirectory(path)) {
           const resources = handler.listDirectory(path, depth);
-          res.xml(resources);
+          sendXml(res, resources);
         } else {
           const content = handler.readFile(path);
           if (content) {
@@ -64,7 +70,7 @@ router.all('*', async (req: Request, res: Response, next: NextFunction) => {
 
       case 'PROPFIND': {
         const resources = handler.listDirectory(path, depth);
-        res.xml(resources);
+        sendXml(res, resources);
         break;
       }
 
@@ -85,10 +91,9 @@ router.all('*', async (req: Request, res: Response, next: NextFunction) => {
       }
 
       case 'LOCK': {
-        const owner = req.headers.owner as string || 'unknown';
-        const lock = handler.lock(path, owner);
+        const lock = handler.lock(path, 'wizardo', 300);
         if (lock) {
-          res.setHeader('Lock-Token', lock.token);
+          res.set('Lock-Token', lock.token);
           res.status(200).send('Locked');
         } else {
           res.status(423).send('Locked');
@@ -97,8 +102,8 @@ router.all('*', async (req: Request, res: Response, next: NextFunction) => {
       }
 
       case 'UNLOCK': {
-        const lockToken = req.headers['lock-token'] as string;
-        const success = handler.unlock(path, lockToken);
+        const token = req.headers['lock-token'] as string;
+        const success = handler.unlock(path, token);
         res.status(success ? 204 : 500).send(success ? 'No Content' : 'Error');
         break;
       }
