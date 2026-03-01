@@ -1,0 +1,29 @@
+<!--
+wizardo Auth App - Authentication and Authorization
+
+Copyright (C) 2026 wizardo maillist <~lunalov2/wizardo@lists.sr.ht>
+-->
+<?xml version="1.0" encoding="UTF-8"?>
+<mime-app>
+  <type>CORE</type>
+  <name>auth</name>
+  <appname>auth</appname>
+  <version>1.0.0</version>
+  <description>Authentication and authorization management</description>
+  <author>wizardo</author>
+  <license>MIT</license>
+  <categories>
+    <category>security</category>
+  </categories>
+  <features>
+    <feature name="user_auth">User authentication</feature>
+    <feature name="session">Session management</feature>
+    <feature name="tokens">API token management</feature>
+  </features>
+  <ext:dependencies mimetype="application/vnd.wizardo.appinfo+xml">
+    <ext:dependency name="com.wizardo.core" version="1.0.0" />
+  </ext:dependencies>
+  <pasv:permissions mimetype="application/vnd.wizardo.appinfo+xml">
+    <pasv:permission name="admin" value="true" />
+  </pasv:permissions>
+</mime-app>

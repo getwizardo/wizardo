@@ -1,0 +1,32 @@
+<!--
+wizardo Core App - Core System Functions
+
+Copyright (C) 2026 wizardo maillist <~lunalov2/wizardo@lists.sr.ht>
+-->
+<?xml version="1.0" encoding="UTF-8"?>
+<mime-app>
+  <type>CORE</type>
+  <name>core</name>
+  <appname>core</appname>
+  <version>1.0.0</version>
+  <description>Core system functions and utilities for wizardo</description>
+  <author>wizardo</author>
+  <license>MIT</license>
+  <categories>
+    <category>system</category>
+  </categories>
+  <features>
+    <feature name="system_info">System information and diagnostics</feature>
+    <feature name="app_management">Manage installed apps</feature>
+    <feature name="logging">Logging and error tracking</feature>
+    <feature name="config">Configuration management</feature>
+  </features>
+  <ext:dependencies mimetype="application/vnd.wizardo.appinfo+xml">
+    <!-- Core has no dependencies -->
+  </ext:dependencies>
+  <pasv:permissions mimetype="application/vnd.wizardo.appinfo+xml">
+    <pasv:permission name="read" value="true" />
+    <pasv:permission name="write" value="true" />
+    <pasv:permission name="admin" value="true" />
+  </pasv:permissions>
+</mime-app>

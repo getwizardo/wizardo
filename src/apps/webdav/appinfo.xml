@@ -1,0 +1,33 @@
+<!--
+wizardo WebDAV App - WebDAV Server
+
+Copyright (C) 2026 wizardo maillist <~lunalov2/wizardo@lists.sr.ht>
+-->
+<?xml version="1.0" encoding="UTF-8"?>
+<mime-app>
+  <type>CORE</type>
+  <name>webdav</name>
+  <appname>webdav</appname>
+  <version>1.0.0</version>
+  <description>WebDAV server for file access via WebDAV protocol</description>
+  <author>wizardo</author>
+  <license>MIT</license>
+  <categories>
+    <category>network</category>
+    <category>storage</category>
+  </categories>
+  <features>
+    <feature name="webdav_server">Full WebDAV server implementation</feature>
+    <feature name="dav1">WebDAV Class 1 support</feature>
+    <feature name="dav2">WebDAV Class 2 support</feature>
+    <feature name="locking">File locking support</feature>
+  </features>
+  <ext:dependencies mimetype="application/vnd.wizardo.appinfo+xml">
+    <ext:dependency name="com.wizardo.core" version="1.0.0" />
+  </ext:dependencies>
+  <pasv:permissions mimetype="application/vnd.wizardo.appinfo+xml">
+    <pasv:permission name="read" value="true" />
+    <pasv:permission name="write" value="true" />
+    <pasv:permission name="delete" value="true" />
+  </pasv:permissions>
+</mime-app>
