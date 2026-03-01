@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+wizardo Files App - File Management
+
+Copyright (C) 2026 wizardo maillist <~lunalov2/wizardo@lists.sr.ht>
+SPDX-License-Identifier: MIT
+-->
+<info xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
+  <id>files</id>
+  <name>Files</name>
+  <summary>File Management and Storage</summary>
+  <description>Core file management app for wizardo - upload, download, organize and share your files</description>
+  <version>1.0.0</version>
+  <licence>MIT</licence>
+  <author>wizardo</author>
+  <author>lunalov2</author>
+  <types>
+    <filesystem/>
+  </types>
+  <category>files</category>
+  <bugs>https://sr.ht/~lunalov2/wizardo</bugs>
+  <dependencies>
+    <wizardo min-version="1.0.0" max-version="1.0.0"/>
+  </dependencies>
+
+  <navigations>
+    <navigation>
+      <name>Files</name>
+      <route>files.index</route>
+      <order>0</order>
+    </navigation>
+  </navigations>
+
+  <settings>
+    <admin>OCA\Files\Settings\AdminSettings</admin>
+    <personal>OCA\Files\Settings\PersonalSettings</personal>
+  </settings>
+
+  <activity>
+    <settings>
+      <setting>OCA\Files\Activity\Settings\FileActivitySettings</setting>
+    </settings>
+    <filters>
+      <filter>OCA\Files\Activity\Filter\FileChanges</filter>
+    </filters>
+    <providers>
+      <provider>OCA\Files\Activity\Provider</provider>
+    </providers>
+  </activity>
+
+</info>
