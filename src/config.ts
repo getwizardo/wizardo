@@ -4,7 +4,7 @@
  * @returns {Object} config object
  */
 import { readFileSync, mkdirSync, existsSync } from "fs";
-import { parse } from "node-html-parser";
+import { parse, HTMLElement } from "node-html-parser";
 import { resolve, join } from "path";
 import { cwd, exit } from "process";
 
@@ -63,7 +63,7 @@ function parseConfig(): WizardoConfig {
 
   // Extract children elements as key-value pairs
   configNode.childNodes.forEach((node) => {
-    if (node.tagName) {
+    if (node instanceof HTMLElement) {
       const key = node.tagName.toLowerCase();
       const value = node.textContent?.trim();
 

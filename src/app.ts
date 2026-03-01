@@ -8,21 +8,16 @@ import express, { Express, Request, Response, NextFunction } from "express";
 import {
   createServer,
   Server as HTTPServer,
-  IncomingMessage,
-  ServerResponse,
 } from "http";
 import {
   existsSync,
   readdirSync,
   mkdirSync,
-  statSync,
-  createReadStream,
-  createWriteStream,
 } from "fs";
 import { join, resolve, extname, dirname } from "path";
 import { cwd } from "process";
-import { nephele } from "nephele";
-import { LocalFileSystemResource } from "nephele/dist/resource/local-file-system";
+import nephele from "nephele";
+import { LocalFileSystemAdapter } from "@nephele/adapter-file-system";
 
 // Router handler type
 export type RouterHandler = (
@@ -202,10 +197,12 @@ export class WizardoApp {
     }
 
     try {
-      const webDAVResource = new LocalFileSystemResource(this.webDAVRoot);
+      const adapter = new LocalFileSystemAdapter({
+        root: this.webDAVRoot,
+      });
 
       const webDAVHandler = nephele({
-        resource: webDAVResource,
+        adapter,
         authenticate: async (username: string, password: string) => {
           // Basic authentication - customize as needed
           return true;
