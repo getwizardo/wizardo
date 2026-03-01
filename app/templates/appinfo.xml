@@ -1,0 +1,7 @@
+<!--
+wizardo SPRING - our core application 
+
+Copyright (C) 2026 wizardo maillist <~lunalov2/wizardo@lists.sr.ht>
+-->
+<?xml version="1.0" encoding="UTF-8"?>
+<mime-app><type><!-- CORE/EMBEDDED/EXTENSION --></type><name>template</name><!-- name autogenerate "com.<name>.<appname>" --><appname>template</appname><version>1.0.0</version><description>template app</description><author>wizardo</author><license>MIT</license><ext:dependencies mimetype="application/vnd.wizardo.appinfo+xml"><ext:dependency  name="com.wizardo.core" version="1.0.0" /><ext:dependency  name="com.wizardo.webdav" version="1.0.0" /><ext:dependency  name="com.wizardo.mime" version="1.0.0" /><!-- ... --></ext:dependencies><pasv:permissions mimetype="application/vnd.wizardo.appinfo+xml"><pasv:permission name="read" value="true" /></pasv:permissions></mime-app>

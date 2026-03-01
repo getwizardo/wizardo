@@ -15,10 +15,6 @@
     // *.d.ts files
     "declaration": true,
     "declarationDir": "./dist/types",
-    // Source maps (encrypted for security)
-    "sourceMap": true,
-    "inlineSources": true,
-
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]
