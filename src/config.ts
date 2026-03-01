@@ -64,8 +64,8 @@ function parseConfig(): WizardoConfig {
   // Extract children elements as key-value pairs
   configNode.childNodes.forEach((node) => {
     if (node instanceof HTMLElement) {
-      const key = node.tagName.toLowerCase();
-      const value = node.textContent?.trim();
+      const key = (node as HTMLElement).tagName.toLowerCase();
+      const value = (node as HTMLElement).textContent?.trim();
 
       if (key === "port") {
         const portNum = parseInt(value || "3000", 10);

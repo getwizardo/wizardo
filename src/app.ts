@@ -17,7 +17,7 @@ import {
 import { join, resolve, extname, dirname } from "path";
 import { cwd } from "process";
 import nephele from "nephele";
-import { LocalFileSystemAdapter } from "@nephele/adapter-file-system";
+import LocalFileSystemAdapter from "@nephele/adapter-file-system";
 
 // Router handler type
 export type RouterHandler = (
@@ -202,16 +202,11 @@ export class WizardoApp {
       });
 
       const webDAVHandler = nephele({
-        adapter,
-        authenticate: async (username: string, password: string) => {
-          // Basic authentication - customize as needed
-          return true;
-        },
-        authorize: async (username: string, path: string, method: string) => {
-          // Authorization logic - customize as needed
-          return true;
-        },
-      });
+        adapter: async () => adapter,
+        authenticator: async () => ({
+          authenticate: async () => true,
+        }),
+      } as any);
 
       // Mount WebDAV at /webdav path
       this.app.use("/webdav", webDAVHandler);
