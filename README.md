@@ -1,8 +1,34 @@
-# wizardo-cli
+# Wizardo
 
-`wizardo-package` is a powerful TypeScript command-line file manager. It works directly on the local filesystem: no cloud desktop server, account, or backend is required.
+Wizardo now includes two native-facing tools:
 
-## Install
+- `wizardo-cli` / `wizardo-package`: a powerful local TypeScript file manager.
+- `wizardo-ssh`: a dependency-free C++17 supervisor for a real OpenSSH server.
+
+## Native SSH server
+
+The C++ program deliberately does not reimplement SSH cryptography. It generates a locked-down temporary OpenSSH configuration and executes the platform's audited `sshd` binary. This keeps the entry point native while avoiding an unsafe home-grown SSH protocol implementation.
+
+Build it with:
+
+```sh
+cmake -S . -B build
+cmake --build build
+```
+
+Run it with an existing OpenSSH host key:
+
+```sh
+./build/wizardo-ssh \
+  --host-key /etc/ssh/ssh_host_ed25519_key \
+  --port 2222
+```
+
+Options include `--sshd`, `--address`, `--config`, and `--pid`. The generated configuration enables password and public-key authentication, disables root login, X11 forwarding, TCP forwarding, and tunneling, and runs in the foreground.
+
+A system OpenSSH server package must be installed separately. Wizardo does not copy or reimplement OpenSSH.
+
+## TypeScript file CLI
 
 ```sh
 npm install
@@ -11,40 +37,14 @@ npm link
 wizardo help
 ```
 
-The package exposes both `wizardo` and `wizardo-cli` commands. Node.js 20 or newer is required.
-
-## Commands
+The CLI works directly on the local filesystem:
 
 ```sh
-wizardo pwd
 wizardo ls -la projects
 wizardo tree . -L 3
 wizardo find . '*.ts'
-wizardo stat package.json
-wizardo du .
-wizardo cat README.md
-wizardo head README.md -n 5
-wizardo tail app.log -n 20
-wizardo touch notes/today.md
-wizardo write notes/today.md "Ship it"
-wizardo append notes/today.md "Another line"
-wizardo mkdir -p backups/2026
-wizardo cp -r src backups/src
-wizardo mv old.txt archive/old.txt
+wizardo cp -r src backup/src
 wizardo rm -rf build
 ```
 
-## Capabilities
-
-- Fast directory listing with hidden files, metadata, and JSON output
-- Recursive tree display with configurable depth
-- Recursive name and extension search
-- File metadata and disk-usage inspection
-- Read, head, and tail files
-- Create, replace, append, and touch files
-- Recursive copy and removal
-- Move and rename files
-- Parent-directory creation
-- Useful Unix-style aliases and flags
-
-All paths are resolved from the directory where the command is run. Use `--json` with supported inspection commands for scripts.
+Node.js 20 or newer is required for the TypeScript CLI.
