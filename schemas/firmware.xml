@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<firmware name="wizardo-runtime" version="1.0.0" target="node-native">
+  <description>Portable TypeScript boot and device manifest.</description>
+  <warning>This is a runtime abstraction, not bare-metal hardware firmware.</warning>
+  <devices>
+    <device id="filesystem" driver="native-fs" state="ready" />
+    <device id="terminal" driver="stdio" state="ready" />
+    <device id="clock" driver="system-clock" state="ready" />
+  </devices>
+  <boot entry="src/firmware/boot.ts" mode="structured-runtime" />
+</firmware>

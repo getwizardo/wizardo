@@ -1,0 +1,66 @@
+schema: wizardo-command-registry
+version: 1
+runtime: typescript
+commands:
+  - name: ls
+    aliases: [dir]
+    handler: core/files.list
+    arguments: [{name: path, required: false, variadic: true}]
+    flags: [all, long, json]
+  - name: tree
+    handler: core/files.tree
+    arguments: [{name: path, required: false}]
+    options: [{name: depth, type: integer, default: 3}]
+  - name: find
+    handler: core/files.find
+    arguments: [{name: path, required: false}, {name: pattern, required: false}]
+    flags: [all, json]
+  - name: checksum
+    aliases: [hash]
+    handler: core/files.checksum
+    arguments: [{name: file, required: true}, {name: algorithm, default: sha256}]
+  - name: stat
+    handler: core/files.metadata
+    arguments: [{name: path, required: true}]
+  - name: du
+    handler: core/files.disk
+    arguments: [{name: path, default: .}]
+  - name: cat
+    handler: core/files.read
+    arguments: [{name: file, required: true, variadic: true}]
+  - name: head
+    handler: core/files.read
+    options: [{name: lines, type: integer, default: 10}]
+  - name: tail
+    handler: core/files.read
+    options: [{name: lines, type: integer, default: 10}]
+  - name: touch
+    handler: core/files.touch
+    arguments: [{name: file, required: true, variadic: true}]
+  - name: write
+    handler: core/files.write
+    arguments: [{name: file, required: true}, {name: text, required: true, variadic: true}]
+  - name: append
+    handler: core/files.write
+    arguments: [{name: file, required: true}, {name: text, required: true, variadic: true}]
+  - name: mkdir
+    handler: core/files.makeDir
+    arguments: [{name: directory, required: true, variadic: true}]
+    flags: [parents]
+  - name: cp
+    aliases: [copy]
+    handler: core/files.copy
+    arguments: [{name: source, required: true}, {name: target, required: true}]
+    flags: [recursive]
+  - name: mv
+    aliases: [move]
+    handler: core/files.move
+    arguments: [{name: source, required: true}, {name: target, required: true}]
+  - name: rm
+    aliases: [remove, delete]
+    handler: core/files.remove
+    arguments: [{name: path, required: true, variadic: true}]
+    flags: [recursive, force]
+  - name: firmware
+    handler: firmware/boot
+    output: json

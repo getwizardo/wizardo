@@ -49,14 +49,28 @@ npm link
 wizardo help
 ```
 
-The CLI works directly on the local filesystem:
+The CLI works directly on the local filesystem and is split into command, parser, core filesystem, and firmware modules:
+
+```text
+src/index.ts
+src/cli/parser.ts
+src/core/files.ts
+src/firmware/boot.ts
+schemas/commands.yaml
+schemas/firmware.xml
+```
 
 ```sh
 wizardo ls -la projects
 wizardo tree . -L 3
 wizardo find . '*.ts'
+wizardo checksum package.json sha512
 wizardo cp -r src backup/src
 wizardo rm -rf build
+wizardo firmware
+wizardo schema
 ```
 
-Node.js 20 or newer is required for the TypeScript CLI.
+The YAML command registry documents handlers, arguments, aliases, flags, and output contracts. The XML firmware manifest describes the portable TypeScript runtime devices and boot entry point.
+
+Node.js 20 or newer is required for the TypeScript CLI. The TypeScript firmware layer is a portable runtime/boot abstraction; it is not bare-metal microcontroller firmware.
