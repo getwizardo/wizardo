@@ -9,6 +9,18 @@ Wizardo now includes two native-facing tools:
 
 The C++ program deliberately does not reimplement SSH cryptography. It generates a locked-down temporary OpenSSH configuration and executes the platform's audited `sshd` binary. This keeps the entry point native while avoiding an unsafe home-grown SSH protocol implementation.
 
+The native server is split into focused source files:
+
+```text
+native/include/wizardo/config.hpp
+native/include/wizardo/sshd_config.hpp
+native/include/wizardo/process.hpp
+native/src/main.cpp
+native/src/config.cpp
+native/src/sshd_config.cpp
+native/src/process.cpp
+```
+
 Build it with:
 
 ```sh
